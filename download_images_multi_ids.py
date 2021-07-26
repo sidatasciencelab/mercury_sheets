@@ -16,11 +16,14 @@ def ids_ark_thumbnail(ids_url):
     file_dest = f'thumbnails/{ark_id}.jpg'
     response = requests.get(ids_url)
     pil_image = Image.open(BytesIO(response.content))
+    width, height = pil_image.size
     pil_image.save(file_dest)
     end_epoch = time.time()
     return_dict = {'start_time':start_epoch,
                 'end_time':end_epoch,
                 'dl_time':end_epoch - start_epoch,
+                'width':width,
+                'height':height,
                 'ark_id':ark_id}  
     return return_dict
 
@@ -32,8 +35,7 @@ if __name__ == '__main__':
 
     multi = pd.read_csv('herbarium_multi.tsv', sep='\t')
 
-    multi_sample = multi.sample(50)
-    ids_sample = multi_sample['ids_url'].to_list()
+    ids_sample = multi['ids_url'].to_list()
 
     start_time = time.perf_counter()
 
