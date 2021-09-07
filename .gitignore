@@ -2,7 +2,6 @@
 .ipynb_checkpoints*
 dask-worker-space*
 si_openaccess*
-thumbnails*
 stained.tar.gz
 unstained.tar.gz
 botany_ids_and_dates.tsv
